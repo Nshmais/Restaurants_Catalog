@@ -1,0 +1,49 @@
+{% extends "Base.html" %}
+{% block content %}
+
+
+<body>
+    <a href='{{url_for('newMenuItem', restaurant_id = restaurant.id) }}'>Add New Menu Item</a>
+
+    <h1>Restaurant:{{restaurant.name}}</h1>
+
+
+<!-- MESSAGE FLASHING EXAMPLE -->
+<!--     {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    <ul>
+    {% for message in messages %}
+      <li><strong>{{message}}</strong></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %} -->
+<!-- END MESSAGE FLASHING EXAMPLE -->
+
+
+
+    {% for item in items %}
+
+    <div>
+    <hr>
+
+    <p>Item: {{item.name}}</p>
+    <p>Description: {{item.description}}</p>
+    <p>Price: {{item.price}} </p>
+    <p>Course: {{item.course}}</p>
+
+    <!-- build the url for edit page -->
+    <a href='{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = item.id) }}'>Edit</a>
+
+    </br>
+    <!-- build the url for delete page -->
+    <a href = '{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = item.id ) }}'>Delete</a>
+    <hr>
+    </div>
+
+
+    {% endfor %}
+</body>
+
+{% endblock %}

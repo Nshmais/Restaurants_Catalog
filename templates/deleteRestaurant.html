@@ -1,0 +1,20 @@
+{% extends "Base.html" %}
+{% block content %}
+
+
+<div class="well">
+<form action= "{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}" method = 'POST'>
+    <div class="container">
+        <div class="col-md-12">
+        <h3> Are You sure you want to delete {{restaurant.name}}? </h3>
+
+            <button type="submit" value='Edit' class="btn btn-success">Yes</button>
+            <a class="btn btn-primary" name="Cancel" href="{{ url_for('showRestaurants', restaurant_id = restaurant.id)}}">No</a>
+        </div>
+    </div>
+
+
+
+</form>
+</div>
+{% endblock %}

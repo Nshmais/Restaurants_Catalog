@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+</head>
+
+<body>
+
+    <div class="container">
+        <top class="col-md-12">
+            <div class="col-md-10" >
+                <h1>Restaurants</h1>
+            </div>
+            <div class="col-md-2" style="margin-top: 20px;">
+                <a href="{{url_for('showLogin')}}"><button type="button" class="btn btn-outline-primary">Login</button></a>
+            </div>
+        </top>
+
+        {% for restaurant in restaurants %}
+        <div class="col-md-12 well" style="margin-top: 10px; border-color: black;">
+            <a href = "{{url_for('showMenu', restaurant_id = restaurant.id)}}"> <h3>{{restaurant.name}}</h3></a>
+            <img src="{{creator.picture}}" alt="User" height="20" width="20">
+            <!-- created by: {{creator.name}} -->
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

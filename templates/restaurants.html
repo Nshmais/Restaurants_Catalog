@@ -1,0 +1,19 @@
+{% extends "Base.html" %}
+{% block content %}
+
+    <div class="container">
+        <h1>Restaurants</h1>
+
+        <a href = "{{url_for('newRestaurant')}}"> <button type="button" class="btn btn-outline-primary"> Add New Restaurant</button></a>
+
+
+        {% for restaurant in restaurants %}
+        <div class="col-md-11 well" style="margin-top: 10px; border-color: black;">
+            <a href = "{{url_for('showMenu', restaurant_id = restaurant.id)}}"> <h3>{{restaurant.name}}</h3></a>
+
+            <p><a href = "{{url_for('editRestaurant',restaurant_id = restaurant.id)}}">Edit Restaurant</a></p>
+            <p> <a href = "{{url_for('deleteRestaurant',restaurant_id = restaurant.id)}}">Delete Restaurant</a></p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

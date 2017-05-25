@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
+<body>
+    <div class="container">
+        <top class="col-md-12 well" style="margin-top: 10px;">
+
+            <div class="col-md-1" >
+                <a href = '{{url_for('showRestaurants')}}'>
+                    <img src="https://cdn4.iconfinder.com/data/icons/home3/102/Untitled-12-512.png" alt="Home" height="40" width="40">
+                </a>
+            </div>
+
+            <div class="col-md-9" >
+                Welcome:
+                <img class="img-circle" src="{{picture}}" alt="User" height="40" width="40">
+                {{user}}
+                ({{email}})
+            </div>
+
+            <div class="col-md-2">
+                <a href = "{{url_for('gdisconnect')}}"> <button type="button" class="btn btn-outline-primary">Logout    </button></a>
+            </div>
+
+        </top>
+        <content class="col-md-12">
+            {% block content %}
+            {% endblock %}
+        </content>
+    </div>
+</body>
+</html>
+

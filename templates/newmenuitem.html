@@ -1,0 +1,45 @@
+{% extends "Base.html" %}
+{% block content %}
+
+<body>
+    <div class="row row container">
+        <h1> New Menu Item </h1>
+        <form action="{{url_for('newMenuItem', restaurant_id = restaurant_id )}}" method = 'POST'>
+        <div class="col-md-12">Menu's name:</div>
+        <input type='text' size='30' name='name'>
+        <br>
+        <div class="col-md-12">Menu description:</div>
+        <input type='text' size='30' name='description'>
+        <br>
+        <div class="col-md-12">Menu price:</div>
+        <input type='text' size='30' name='price'>
+        <br>
+        <br>
+        <div class="col-md-12">Menu course:</div>
+         <dd><input type ='radio' name='course' value='Appetizer'>Appetizer</dd>
+            <dd><input type ='radio' name='course' value='Entree'>Entree</dd>
+            <dd><input type ='radio' name='course' value='Dessert'>Dessert</dd>
+            <dd><input type ='radio' name='course' value='Beverage'>Beverage</dd>
+
+
+<!--             <br>
+            <br>
+            <div class="col-md-2">Menu course:</div>
+            <select name="Menu course:">
+            <option></option>
+            <option value="Appetizer">Appetizer</option>
+            <option value="Entree">Entree</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Beverage">Beverage</option>
+            </select> -->
+
+            <br>
+
+            <!-- <input type='submit' value='Create'> -->
+            <button type="submit" value='Create' class="btn btn-success">Add</button>
+        <a href = "{{url_for('showMenu', restaurant_id = restaurant_id)}}"> <button type="button" class="btn btn-danger"> Cancel</button>
+
+        </form>
+    </div>
+</body>
+{% endblock %}
