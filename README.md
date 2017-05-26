@@ -1,3 +1,5 @@
+<img src="Restaurant_Icon.png" width="100">
+
 # Restaurants_Catalog
 This project will develop an application that provides a list of restaurants with a variety of Menus as well as provide a user registration and authentication system. Registered users will have the ability to post, edit and delete their items.
 
