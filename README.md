@@ -44,7 +44,7 @@ The database can be populated in three ways:
    session.commit()
    ```
    just like that you can add (menuItem2) and (menuItem3)and so on.
-3. This is the most complicated one, you can download [DB Browser for SQLite 3.9.1](https://github.com/sqlitebrowser/sqlitebrowser/releases/tag/v3.9.1) and edit the `restaurantmenuwithusers.db` file directly. 
+3. This is the most complicated one, you can download [DB Browser for SQLite](http://sqlitebrowser.org/), DB Browser for SQLite 3.9.1 for [Windows](https://github.com/sqlitebrowser/sqlitebrowser/releases/tag/v3.9.1) it's also avilable for other OSes, and edit the `restaurantmenuwithusers.db` file directly using the DB Browser. 
 ## URL Extentions 
 This website has many expentions that display assigned pages if added to the end of the **http://localhost:5000** URL:
 1. Display a list of all restaurants in the Database:
