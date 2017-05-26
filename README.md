@@ -23,6 +23,30 @@ The project code requires the following software packages:
 - Flask
 - The following Python packages: oauth2client /requests /httplib2
 
+## Database Setup
+The database can be setup by running `database_setup.py`file
+```
+   $ python database_setup.py
+```
+
+## Database Populate
+The database can be populated in two ways:
+1. Just insert every resturan and it's menu at a time from the web pages of creating new restaurant.
+2. Edit `lotsofmenus.py` file using sublime or your favorite text editor program:
+   Edit the lines to reflect your Entries, example name of the restaurant (name=Le Bernardin), and your user_id for example (user_id=8)
+   ```
+   restaurant1 = Restaurant(user_id=8, name="Le Bernardin")
+   session.add(restaurant1)
+   session.commit()
+   ```
+   also add menu name, description, price, and course type:  
+   ```
+   menuItem1 = MenuItem(user_id=8, name="", description="", price="", course="", restaurant=restaurant1)
+   session.add(menuItem1)
+   session.commit()
+   ```
+   and just like that you can add (menuItem2) and (menuItem3)and so on.
+
 ## URL Extentions 
 This website has many expentions that display assigned pages if added to the end of the **http://localhost:5000** URL:
 1. Display a list of all restaurants in the Database:
