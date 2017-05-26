@@ -28,7 +28,7 @@ The database can be setup by running `database_setup.py`file
 ```
 
 ## Database Populate
-The database can be populated in two ways:
+The database can be populated in three ways:
 1. Just insert every resturan and it's menu at a time from the web pages of creating new restaurant.
 2. Edit `lotsofmenus.py` file using sublime or your favorite text editor program:
    Edit the lines to reflect your Entries, example name of the restaurant (name=Le Bernardin), and your user_id for example (user_id=8)
@@ -44,7 +44,7 @@ The database can be populated in two ways:
    session.commit()
    ```
    just like that you can add (menuItem2) and (menuItem3)and so on.
-
+3. This is the most complicated one, you can download [DB Browser for SQLite 3.9.1](https://github.com/sqlitebrowser/sqlitebrowser/releases/tag/v3.9.1) and edit the `restaurantmenuwithusers.db` file directly. 
 ## URL Extentions 
 This website has many expentions that display assigned pages if added to the end of the **http://localhost:5000** URL:
 1. Display a list of all restaurants in the Database:
