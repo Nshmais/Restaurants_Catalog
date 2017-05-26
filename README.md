@@ -16,6 +16,13 @@ In order to install and run the project please follow the following steps:
 3. The project will run on the appropriate port (for this project it's localhost:5000) or check the command line.
 4. To terminate the project in commandlinetype  **^D** which is **Ctrl+D**.
 
+## Required Libraries and packages
+The project code requires the following software packages:
+- SQLAlchemy
+- Python 2.7
+- Flask
+- The following Python packages: oauth2client /requests /httplib2
+
 ## URL Extentions 
 - Display a list of all restaurants in the Database:
 `/` or `/restaurant`
