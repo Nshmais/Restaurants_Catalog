@@ -24,33 +24,34 @@ The project code requires the following software packages:
 - The following Python packages: oauth2client /requests /httplib2
 
 ## URL Extentions 
-- Display a list of all restaurants in the Database:
+This website has many expentions that display assigned pages if added to the end of the **http://localhost:5000** URL:
+1. Display a list of all restaurants in the Database:
 `/` or `/restaurant`
-- Connect to login page with Google Oath:
+2. Connect to login page with Google Oath:
 `/login`
-- Logout from the website and disconnect the user Google info:  
+3. Logout from the website and disconnect the user Google info:  
 `/gdisconnect`
-- Display a specific (chosen from the list or by intering restaurant_id) restaurant with its menu:
+4. Display a specific (chosen from the list or by intering restaurant_id) restaurant with its menu:
 `/restaurant/<int:restaurant_id>/menu/JSON`
-- Create new restaurant to add to database of the website:
+5. Create new restaurant to add to database of the website:
 `/restaurant/new/`
-- Edit an existing restaurant to change its name:
+6. Edit an existing restaurant to change its name:
 `/restaurant/<int:restaurant_id>/edit/`
-- Delete a restaurant from the website database:
+7. Delete a restaurant from the website database:
 `/restaurant/<int:restaurant_id>/delete/`
-- Display restaurant list as JSON file which can be used as an input for other uses: 
+8. Display restaurant list as JSON file which can be used as an input for other uses: 
 `/restaurant/JSON`
 
-- Display the content of a spesific resturant menu:
+9. Display the content of a spesific resturant menu:
 `/restaurant/<int:restaurant_id>/`
 `/restaurant/<int:restaurant_id>/menu/`
-- Create new menu item to add the the chosen restaurant:
+10. Create new menu item to add the the chosen restaurant:
 `/restaurant/<int:restaurant_id>/menu/new/`
-- Edit a menu item (name, Description, price, and course type):
+11. Edit a menu item (name, Description, price, and course type):
 `/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit`
-- Delete a menu item from website database:
+12. Delete a menu item from website database:
 `/restaurant/<int:restaurant_id>/menu/<int:menu_id>/delete`
-- Display menu items as JSON file:
+13. Display menu items as JSON file:
 `/restaurant/<int:restaurant_id>/menu/JSON`
 `/restaurant/<int:restaurant_id>/menu/<int:menu_id>/JSON`
 
