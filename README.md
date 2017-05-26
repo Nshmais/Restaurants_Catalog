@@ -8,13 +8,11 @@ In order to install and run the project please follow the following steps:
       $ sudo apt-get install git
       $ git clone https://github.com/Nshmais/Restaurants_Catalog
       $ cd Restaurant_catalog
+      $ python Start.py 
    ```
-2. In the command prompt in project folder, run the command (dev_appserver.py app.yaml):
-```
-     $ python Start.py   
-```
-3. The project will run on the appropriate port (for this project it's localhost:5000) or check the command line.
-4. To terminate the project in commandlinetype  **^D** which is **Ctrl+D**.
+2. The project will run on the appropriate port (for this project it's localhost:5000) or check the command line.
+3. To terminate the project from local host in commandline type  **^C** which is **Ctrl+C**.
+4. To terminate the VM type  **^D** which is **Ctrl+D**.
 
 ## Required Libraries and packages
 The project code requires the following software packages:
