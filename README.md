@@ -45,7 +45,7 @@ The database can be populated in two ways:
    session.add(menuItem1)
    session.commit()
    ```
-   and just like that you can add (menuItem2) and (menuItem3)and so on.
+   just like that you can add (menuItem2) and (menuItem3)and so on.
 
 ## URL Extentions 
 This website has many expentions that display assigned pages if added to the end of the **http://localhost:5000** URL:
