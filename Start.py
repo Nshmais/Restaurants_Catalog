@@ -94,7 +94,8 @@ def gconnect():
         # return response
 
     # Store the access token in the session for later use.
-    login_session['credentials'] = credentials
+    # login_session['credentials'] = credentials
+    login_session['credentials'] = credentials.access_token
     login_session['gplus_id'] = gplus_id
 
     # Get user info
@@ -159,7 +160,8 @@ def gdisconnect():
         response = make_response(json.dumps('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    access_token = credentials.access_token
+    # access_token = credentials.access_token
+    access_token = credentials
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
@@ -207,13 +209,17 @@ def restaurantsJSON():
 @app.route('/restaurant/')
 def showRestaurants():
     restaurants = session.query(Restaurant).order_by(asc(Restaurant.name))
-    creator = getUserInfo(Restaurant.user_id)
     if 'username' not in login_session:
-        return render_template('publicrestaurants.html',restaurants=restaurants, creator=creator)
+        print '============='
+        print 'i was here'
+        print '==============='
+        return render_template('publicrestaurants.html', restaurants=restaurants)
     else:
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
+        user_id = login_session['user_id']
+        creator = getUserInfo(user_id)
         return render_template('restaurants.html', restaurants=restaurants, creator=creator, user=user, picture=picture, email=email)
 
 
@@ -223,13 +229,14 @@ def newRestaurant():
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
-        newRestaurant = Restaurant(name=request.form['name'])
+        print login_session['user_id']
+        newRestaurant = Restaurant(name=request.form['name'],user_id=login_session['user_id'])
+        # newRestaurant = Restaurant(name=request.form['name'])
         session.add(newRestaurant)
         # flash('New Restaurant %s Successfully Created' % newRestaurant.name)
         session.commit()
         return redirect(url_for('showRestaurants'))
     else:
-
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
@@ -239,9 +246,13 @@ def newRestaurant():
 # Edit a restaurant
 @app.route('/restaurant/<int:restaurant_id>/edit/', methods=['GET', 'POST'])
 def editRestaurant(restaurant_id):
+    # check if user is logged in
     if 'username' not in login_session:
         return redirect('/login')
     editedRestaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    # check if current user is the owner
+    if editedRestaurant.user_id != login_session['user_id']:
+        return redirect('/login')
     if request.method == 'POST':
         if request.form['name']:
             editedRestaurant.name = request.form['name']
@@ -260,7 +271,13 @@ def deleteRestaurant(restaurant_id):
     if 'username' not in login_session:
         return redirect('/login')
     restaurantToDelete = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    # check if current user is the owner
+    if restaurantToDelete.user_id != login_session['user_id']:
+        return redirect('/login')
     if request.method == 'POST':
+        items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all()
+        for item in items:
+            session.delete(item)
         session.delete(restaurantToDelete)
         flash('%s Successfully Deleted' % restaurantToDelete.name)
         session.commit()
@@ -278,14 +295,16 @@ def deleteRestaurant(restaurant_id):
 def showMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all()
-    creator = getUserInfo(restaurant.user_id)
+    #check if a user is logged in
+    # check if the current user is th
+    # creator = getUserInfo(restaurant.user_id)
     if 'username' in login_session or creator.id == login_session['user_id']:
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
-        return render_template('menu.html', items=items, restaurant=restaurant, creator=creator, user=user, picture=picture, email=email)
+        return render_template('menu.html', items=items, restaurant=restaurant, user=user, picture=picture, email=email)
     else:
-        return render_template('publicmenu.html', items=items, restaurant=restaurant, creator=creator)
+        return render_template('publicmenu.html', items=items, restaurant=restaurant)
 
 
 # Create a new menu item
@@ -315,6 +334,9 @@ def editMenuItem(restaurant_id, menu_id):
         return redirect('/login')
     editedItem = session.query(MenuItem).filter_by(id=menu_id).one()
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    # check if current user is the owner
+    if restaurant.user_id != login_session['user_id']:
+        return redirect('/login')
     if request.method == 'POST':
         if request.form['name']:
             editedItem.name = request.form['name']
@@ -342,6 +364,9 @@ def deleteMenuItem(restaurant_id, menu_id):
         return redirect('/login')
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     itemToDelete = session.query(MenuItem).filter_by(id=menu_id).one()
+    # check if current user is the owner
+    if restaurant.user_id != login_session['user_id']:
+        return redirect('/login')
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
