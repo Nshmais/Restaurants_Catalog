@@ -217,7 +217,12 @@ def showRestaurants():
         email = login_session['email']
         user_id = login_session['user_id']
         creator = getUserInfo(user_id)
-        return render_template('restaurants.html', restaurants=restaurants, creator=creator, user=user, picture=picture, email=email)
+        return render_template('restaurants.html',
+                                restaurants=restaurants,
+                                creator=creator,
+                                user=user,
+                                picture=picture,
+                                email=email)
 
 
 # Create a new restaurant
@@ -249,17 +254,22 @@ def editRestaurant(restaurant_id):
     # check if current user is the owner
     if editedRestaurant.user_id != login_session['user_id']:
         #redirect to New Restaurant
-        return redirect('/restaurant/new')
+        flash ("You are Unauthorized to edit this restaurant. Please create you own restaurant")
+        return redirect (url_for('newRestaurant'))
     if request.method == 'POST':
         if request.form['name']:
             editedRestaurant.name = request.form['name']
-            flash('Restaurant Successfully Edited %s' % editedRestaurant.name)
+            # flash('Restaurant Successfully Edited %s' % editedRestaurant.name)
             return redirect(url_for('showRestaurants'))
     else:
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
-        return render_template('editRestaurant.html', restaurant=editedRestaurant, user=user, picture=picture, email=email)
+        return render_template('editRestaurant.html',
+                                restaurant=editedRestaurant,
+                                user=user,
+                                picture=picture,
+                                email=email)
 
 
 # Delete a restaurant
@@ -271,7 +281,9 @@ def deleteRestaurant(restaurant_id):
     # check if current user is the owner
     if restaurantToDelete.user_id != login_session['user_id']:
         #redirect to New Restaurant
-        return redirect('/restaurant/new')
+        flash ("You are Unauthorized to delete this restaurant. Please create you own restaurant")
+        return redirect (url_for('newRestaurant'))
+
     if request.method == 'POST':
         items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all()
         for item in items:
@@ -284,7 +296,11 @@ def deleteRestaurant(restaurant_id):
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
-        return render_template('deleteRestaurant.html', restaurant=restaurantToDelete, user=user, picture=picture, email=email)
+        return render_template('deleteRestaurant.html',
+                                restaurant=restaurantToDelete,
+                                user=user,
+                                picture=picture,
+                                email=email)
 
 
 # Show a restaurant menu
@@ -300,7 +316,12 @@ def showMenu(restaurant_id):
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
-        return render_template('menu.html', items=items, restaurant=restaurant, user=user, picture=picture, email=email)
+        return render_template('menu.html',
+                                items=items,
+                                restaurant=restaurant,
+                                user=user,
+                                picture=picture,
+                                email=email)
     else:
         return render_template('publicmenu.html', items=items, restaurant=restaurant)
 
@@ -335,7 +356,8 @@ def editMenuItem(restaurant_id, menu_id):
     # check if current user is the owner
     if restaurant.user_id != login_session['user_id']:
         #redirect to New Restaurant
-        return redirect('/restaurant/new')
+        flash ("You are Unauthorized to edit this menu item. Please create you own restaurant")
+        return redirect (url_for('newRestaurant'))
     if request.method == 'POST':
         if request.form['name']:
             editedItem.name = request.form['name']
@@ -366,7 +388,8 @@ def deleteMenuItem(restaurant_id, menu_id):
     # check if current user is the owner
     if restaurant.user_id != login_session['user_id']:
         #redirect to New Restaurant
-        return redirect('/restaurant/new')
+        flash ("You are Unauthorized to delete this menu item. Please create you own restaurant")
+        return redirect (url_for('newRestaurant'))
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
