@@ -333,7 +333,11 @@ def newMenuItem(restaurant_id):
         return redirect('/login')
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     if request.method == 'POST':
-        newItem = MenuItem(name=request.form['name'], description=request.form['description'], price=request.form['price'], course=request.form['course'], restaurant_id=restaurant_id)
+        newItem = MenuItem(name=request.form['name'],
+                            description=request.form['description'],
+                            price=request.form['price'],
+                            course=request.form['course'],
+                            restaurant_id=restaurant_id)
 
         session.add(newItem)
         session.commit()
@@ -343,7 +347,11 @@ def newMenuItem(restaurant_id):
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
-        return render_template('newmenuitem.html', restaurant_id=restaurant_id, user=user, picture=picture, email=email)
+        return render_template('newmenuitem.html',
+                                restaurant_id=restaurant_id,
+                                user=user,
+                                picture=picture,
+                                email=email)
 
 
 # Edit a menu item
@@ -375,7 +383,13 @@ def editMenuItem(restaurant_id, menu_id):
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
-        return render_template('editmenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id, item=editedItem, user=user, picture=picture, email=email)
+        return render_template('editmenuitem.html',
+                                restaurant_id=restaurant_id,
+                                menu_id=menu_id,
+                                item=editedItem,
+                                user=user,
+                                picture=picture,
+                                email=email)
 
 
 # Delete a menu item
@@ -399,7 +413,11 @@ def deleteMenuItem(restaurant_id, menu_id):
         user = login_session['username']
         picture = login_session['picture']
         email = login_session['email']
-        return render_template('deletemenuitem.html', item=itemToDelete, user=user, picture=picture, email=email)
+        return render_template('deletemenuitem.html',
+                                item=itemToDelete,
+                                user=user,
+                                picture=picture,
+                                email=email)
 
 
 if __name__ == '__main__':
